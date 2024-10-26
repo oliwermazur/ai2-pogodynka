@@ -1,0 +1,51 @@
+# config/validator/validation.yaml
+App\Entity\Location:
+  properties:
+    city:
+      - NotBlank:
+          message: "City name cannot be empty"
+          groups: ['create','edit']
+      - Regex:
+          pattern: "/^[A-Za-z ]+$/"
+          message: "City name can only contain letters and spaces"
+          groups: ['create','edit']
+    country:
+      - NotBlank:
+          message: "Country cannot be empty"
+          groups: ['create','edit']
+    latitude:
+      - Range:
+          min: -90
+          max: 90
+          notInRangeMessage: "Latitude must be between {{ min }} and {{ max }}."
+          groups: ['create', 'edit']
+    longitude:
+      - Range:
+          min: -180
+          max: 180
+          notInRangeMessage: "Longitude must be between {{ min }} and {{ max }}."
+          groups: ['create', 'edit']
+
+App\Entity\Measurement:
+  properties:
+    date:
+      - NotBlank:
+          message: "Date cannot be empty"
+          groups: ['measurement_new', 'measurement_edit']
+      - Type:
+          type: \DateTime
+          message: "Invalid date format"
+          groups: ['measurement_new', 'measurement_edit']
+    celsius:
+      - NotBlank:
+          message: "Celsius value cannot be empty"
+          groups: ['measurement_new', 'measurement_edit']
+      - Range:
+          min: -100
+          max: 100
+          notInRangeMessage: "Celsius must be between {{ min }} and {{ max }}."
+          groups: ['measurement_new', 'measurement_edit']
+    location:
+      - NotBlank:
+          message: "Location must be selected"
+          groups: ['measurement_new', 'measurement_edit']
