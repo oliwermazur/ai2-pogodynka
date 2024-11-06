@@ -25,6 +25,7 @@ class LocationRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+
     //    /**
     //     * @return Location[] Returns an array of Location objects
     //     */
