@@ -1,0 +1,16 @@
+{# Szablon JSON #}
+
+{
+    "city": "{{ city }}",
+    "country": "{{ country }}",
+    "measurements": [
+        {% for measurement in measurements %}
+        {
+            "date": "{{ measurement.date|date('Y-m-d') }}",
+            "celsius": "{{ measurement.celsius }}",
+            "fahrenheit": "{{ measurement.fahrenheit }}"
+        }
+        {% if not loop.last %}, {% endif %}
+        {% endfor %}
+    ]
+}
